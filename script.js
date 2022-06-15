@@ -1,23 +1,29 @@
 // Validator object
 function Validator(options) {
+  function validate(inputElement, rule) {
+    let errorElement =
+      inputElement.parentElement.querySelector(".form-message");
+    // Value: inputElement.value
+    // test func: rule.test
+    let errorMessage = rule.test(inputElement.value);
+    if (errorMessage) {
+      errorElement.innerText = errorMessage;
+      inputElement.parentElement.classList.add("invalid");
+    } else {
+      errorElement.innerText = "";
+      inputElement.parentElement.classList.remove("invalid");
+    }
+  }
+
+  //   Get form element which need to be validated
   let formElement = document.querySelector(options.form);
   if (formElement) {
     options.rules.forEach((rule) => {
       let inputElement = formElement.querySelector(rule.selector);
-      let errorElement =
-        inputElement.parentElement.querySelector(".form-message");
+
       if (inputElement) {
         inputElement.onblur = () => {
-          // Value: inputElement.value
-          // test func: rule.test
-          let errorMessage = rule.test(inputElement.value);
-          if (errorMessage) {
-            errorElement.innerText = errorMessage;
-            inputElement.parentElement.classList.add("invalid");
-          } else {
-            errorElement.innerText = "";
-            inputElement.parentElement.classList.remove("invalid");
-          }
+          validate(inputElement, rule);
         };
       }
     });
