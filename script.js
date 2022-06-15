@@ -13,6 +13,10 @@ function Validator(options) {
           let errorMessage = rule.test(inputElement.value);
           if (errorMessage) {
             errorElement.innerText = errorMessage;
+            inputElement.parentElement.classList.add("invalid");
+          } else {
+            errorElement.innerText = "";
+            inputElement.parentElement.classList.remove("invalid");
           }
         };
       }
