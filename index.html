@@ -69,4 +69,11 @@
     </div>
   </body>
   <script src="./script.js"></script>
+  <script>
+    // Expected Output
+    Validator({
+      form: "#form-1",
+      rules: [Validator.isRequired("#fullname"), Validator.isEmail("#email")],
+    });
+  </script>
 </html>
