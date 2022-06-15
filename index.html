@@ -74,7 +74,7 @@
     Validator({
       form: "#form-1",
       rules: [
-        Validator.isRequired("#fullname"),
+        Validator.isRequired("#fullname", "Vui lòng nhập tên đầy đủ"),
         Validator.isEmail("#email"),
         Validator.minLength("#password", 6),
         Validator.isConfirmed(
