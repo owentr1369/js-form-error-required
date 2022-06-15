@@ -77,9 +77,13 @@
         Validator.isRequired("#fullname"),
         Validator.isEmail("#email"),
         Validator.minLength("#password", 6),
-        Validator.isConfirmed("#password_confirmation", function () {
-          return document.querySelector("#form-1 #password").value;
-        }),
+        Validator.isConfirmed(
+          "#password_confirmation",
+          function () {
+            return document.querySelector("#form-1 #password").value;
+          },
+          "Mật khẩu nhập lại không chính xác"
+        ),
       ],
     });
   </script>

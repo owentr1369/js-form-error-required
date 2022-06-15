@@ -69,13 +69,13 @@ Validator.minLength = function (selector, min) {
     },
   };
 };
-Validator.isConfirmed = function (selector, getConfirmValue) {
+Validator.isConfirmed = function (selector, getConfirmValue, message) {
   return {
     selector: selector,
     test: function (value) {
       return value === getConfirmValue()
         ? undefined
-        : "Giá trị nhập vào không chính xác";
+        : message || "Giá trị nhập vào không chính xác";
     },
   };
 };
