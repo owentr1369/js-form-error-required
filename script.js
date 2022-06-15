@@ -22,8 +22,16 @@ function Validator(options) {
       let inputElement = formElement.querySelector(rule.selector);
 
       if (inputElement) {
+        // Handle on blur out of input
         inputElement.onblur = () => {
           validate(inputElement, rule);
+        };
+        // Handle when fill in input
+        inputElement.oninput = () => {
+          let errorElement =
+            inputElement.parentElement.querySelector(".form-message");
+          errorElement.innerText = "";
+          inputElement.parentElement.classList.remove("invalid");
         };
       }
     });
@@ -48,6 +56,16 @@ Validator.isEmail = function (selector) {
     test: function (value) {
       let regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
       return regex.test(value) ? undefined : "Trường này phải là email";
+    },
+  };
+};
+Validator.minLength = function (selector, min) {
+  return {
+    selector: selector,
+    test: function (value) {
+      return value.length >= min
+        ? undefined
+        : `Mật khẩu tối thiểu ${min} ký tự`;
     },
   };
 };
